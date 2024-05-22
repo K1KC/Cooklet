@@ -1,0 +1,122 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #ffbd42;
+    overflow: hidden;
+    margin: -10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    height: 13vh;
+}
+
+nav .logo {
+    color: #f2f2f2;
+    text-decoration: none;
+    height:3em;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+    font-size: 3vh; 
+    font-weight: bold;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 10px 0 10px 0;
+    padding-left: 7vh;
+}
+
+li a {
+    text-decoration: none;
+}
+
+.right-side-navbar {
+    display: flex;
+}
+
+.right-side-navbar li {
+    margin: 0 10px;
+    font-size: 1rem; 
+    font-weight: bold;
+    list-style-type: none;
+    ;
+}
+
+nav a:hover {
+    color: white;
+    transition: color 0.4s;
+}
+
+.logo img {
+    width: 150px;
+    height: 70px;
+}
+
+.searchbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    margin-top: 15vh;
+}
+
+.search-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: bold;
+    
+}
+
+.searchbar :placeholder-shown {
+    padding-left: 20px;
+    font-size: larger;
+    padding-bottom: 5px;
+}
+
+.searchbar input {
+    border-radius: 15px;
+    width: 350px;
+    height: 30px;
+    padding-left: 20px;
+    font-size: larger;
+    padding-bottom: 5px;
+}
+
+.searchbar button {
+    height: 40px;
+    width: fit-content;
+    z-index: 10;
+    margin-left: -25px;
+    border-radius: 15px;
+    font-weight: bold;
+    background-color: #ffbd42;
+}
