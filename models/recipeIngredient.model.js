@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const RecipeIngredientSchema = mongoose.Schema({
     recipe_id: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'Recipe',
+        type: mongoose.Schema.Types.recipe_id, ref: 'Recipe',
         required: '{PATH} is required!'
     },
     ingredient_id: [
-        { type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient' }
+        { type: mongoose.Schema.Types.ingredient_id, ref: 'Ingredient' }
     ],
     ingredient_qty: {
         type: Number,

@@ -5,6 +5,8 @@
 body {
     margin: 0;
     padding: 0;
+    background-image: url("background.jpg");
+    background-size: cover;
 }
 
 .navbar {
@@ -35,8 +37,8 @@ nav .logo {
 nav a {
     color: black;
     text-decoration: none;
-    font-size: 3vh; 
-    font-weight: bold;
+    font-size:3vh; 
+    font-weight: 50;
 }
 
 nav ul {
@@ -64,7 +66,7 @@ li a {
     font-size: 1rem; 
     font-weight: bold;
     list-style-type: none;
-    ;
+    margin-left: 1em;
 }
 
 nav a:hover {
@@ -83,8 +85,19 @@ nav a:hover {
     align-items: center;
 }
 
+
 .container {
     margin-top: 15vh;
+    background-image: url("./food-doodle-seamless-pattern-vector_3733316.png");
+    background-blend-mode: hard-light;
+    background-repeat: repeat;
+    background-size: 30vh;
+    background-color:rgba(0, 0, 0, 0.5);
+    margin-left: 5vh;
+    margin-right: 5vh;
+    border-radius: 12px;
+    border: 1px solid black;
+    height: 50em;
 }
 
 .search-label {
@@ -93,7 +106,7 @@ nav a:hover {
     align-items: center;
     font-size: 32px;
     font-weight: bold;
-    
+    padding-top: 2vh;
 }
 
 .searchbar :placeholder-shown {
@@ -109,6 +122,7 @@ nav a:hover {
     padding-left: 20px;
     font-size: larger;
     padding-bottom: 5px;
+    padding-right: 35px;
 }
 
 .searchbar button {
@@ -119,4 +133,102 @@ nav a:hover {
     border-radius: 15px;
     font-weight: bold;
     background-color: #ffbd42;
+}
+
+.filter-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+}
+
+.filter-label label {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vh;
+    overflow: auto;
+}
+
+.tag-ingredient-button {
+    font-size: 16px;
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+    color: #000000;
+    background-color: #ffffff;
+    padding: 10px 30px;
+    border: solid #000000 1px;
+    box-shadow: rgb(0, 0, 0) 10px 7px 26px -12px;
+    border-radius: 50px;
+    transition : 236ms;
+    transform: translateY(0);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    margin: 30px;
+}
+.tag-ingredient-button:hover {
+	transition : 236ms;
+    padding: 10px 31px;
+    transform : translateY(-0px);
+    background-color: #e6e6e6;
+    color: #000000;
+    border: none;
+}
+
+.tag-ingredient-button:active {
+	position:relative;
+	top:1px;
+    padding: 10px 31px;
+    background-color: #e6e6e6;
+    color: #000000;
+    border: none;
+}
+
+.radio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.radio-inclusions {
+    margin-right: 2vh;
+}
+
+.radio-limit {
+    margin-left: 2vh;
+}
+
+footer {
+    background-color: rgb(255, 136, 0);
+    color: rgb(0, 0, 0);
+    width: 100%;
+    display: inline-flex;
+    bottom: 0;
+    overflow: hidden;
+    position: fixed;
+    font-size: 13px;
+    height: 2vh;
+}
+
+.left-foot {
+    margin-left: 15px;
+    margin-right: auto;
+    margin-top: 0px;
+}
+
+.right-foot {
+    float: right;
+    margin-top: 0px;
+    margin-right: 15px;
+    margin-left: auto;
+    text-align: right;
 }

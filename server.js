@@ -17,7 +17,6 @@ app.use((req, res, next) => {
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 // Test route to check if server is running
 app.get('/test', (req, res) => {
     res.send('Server is running');

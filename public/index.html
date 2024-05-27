@@ -10,7 +10,7 @@
         
         <nav class="navbar">
             <a href="index.html">
-                <img src="./cooklet-high-resolution-logo-transparent.png" alt="logo" class="logo">
+                <img src="cooklet-high-resolution-logo-transparent.png" alt="logo" class="logo">
             </a>
             <ul>
                 <li><a href="discover.html">Discover</a></li>
@@ -23,26 +23,34 @@
             </div>
         </nav>
         <div class="container">
-            <p class="search-label">What will we cook today?</p>
-            <div class="searchbar">
-                <input type="text" placeholder="Search recipe by name...">
-                <button type="submit" class="search_btn" value="">Search</button>
-            </div>
-            <div class="tag-container">
-                
-            </div>
-            <div class="main-content2">
+            <form action="../backend/search.js">
+                    <p class="search-label">What will we cook today?</p>
+                <div class="searchbar">
+                    <input type="text" placeholder="Search recipe by name...">
+                    <button type="submit" class="search_btn" value="">Search</button>
+                </div>
+                <div class="filter-label">
+                    <label>Search based on what you have</label>
+                </div>
+                <div class="tag-container">
+                    <!-- div class for dynamic button -->
+                </div>
+                <div class="radio">
+                    <div class="radio-inclusions">
+                        <label class="radio-label1">Inclusions</label>
+                        <input type="radio" id="inclusions" name="incl" value="0">                    
+                    </div>
+                    <div class="radio-limit">
+                        <label class="radio-label2">Limited to</label>
+                        <input type="radio" id="limit" name="lim" value="1">                     
+                    </div>
+                </div>
 
-            </div>
-            <div class="main-content3">
-                
-            </div>
-            <div class="main-content4">
-                
-            </div>
-        </div>
+            </form>
+        </div>    
         <footer>
-            
+           <p class="left-foot">Group 9 Software Engineer</p>
+           <p class="right-foot">Cooklet</p>
         </footer>
         <script src="./index.js"></script>
     </body>

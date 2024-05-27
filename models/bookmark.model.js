@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const BookmarkSchema = mongoose.Schema({
     user_id: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+        type: mongoose.Schema.Types.user_id, ref: 'User'
     },    
     recipe_id: [
-        { type: mongoose.Schema.Types.ObjectId, ref: 'Recipe'}
+        { type: mongoose.Schema.Types.recipe_id, ref: 'Recipe'}
     ],
 })
 
