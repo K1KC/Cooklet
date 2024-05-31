@@ -14,32 +14,94 @@ document.addEventListener('DOMContentLoaded', async () => {
         ingredients.forEach(ingredient => {
             const button = document.createElement('button');
             button.textContent = ingredient.ingredient_name;
-            button.className = 'tag-ingredient-button'; // Add a class for styling
-            button.addEventListener('click', () => {
-                filterRecipesByIngredient(ingredient.ingredient_name);
+            button.className = 'tag-ingredient-button';
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                addIngredient(ingredient._id, ingredient.ingredient_name);
             });
             tagContainer.appendChild(button);
         });
     } catch (error) {
         console.error('Error fetching ingredients:', error);
-        // Handle the error gracefully, e.g., display a message to the user
     }
 });
 
-async function filterRecipesByIngredient(ingredientName) {
-    try {
-        // Fetch recipes from the server that contain the selected ingredient
-        const response = await fetch(`http://localhost:5500/api/recipes?ingredient=${ingredientName}`);
-        if (!response.ok) {
-            throw new Error('Failed to filter recipes');
+function addIngredient(ingredientId, ingredientName) {
+    const textboxContainer = document.querySelector('.filter-textbox');
+
+    if (Array.from(textboxContainer.querySelectorAll('.ing_name')).some(span => span.dataset.id === ingredientId)) {
+        console.log('Ingredient already added');
+        return;
+    }
+
+    const selectedTagDiv = document.createElement('div');
+    selectedTagDiv.className = 'selected-tag';
+
+    const ingredientText = document.createElement('span');
+    ingredientText.textContent = ingredientName;
+    ingredientText.dataset.id = ingredientId;
+    ingredientText.className = 'ing_name';
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'X';
+    deleteBtn.className = 'filter-delete-button';
+    deleteBtn.addEventListener('click', () => {
+        textboxContainer.removeChild(selectedTagDiv);
+    });
+
+    selectedTagDiv.appendChild(ingredientText);
+    selectedTagDiv.appendChild(deleteBtn);
+    textboxContainer.appendChild(selectedTagDiv);
+}
+
+document.querySelector('#search-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const searchType = event.submitter.id;
+    let searchParams = {};
+
+    if (searchType === 'search-by-ingredients') {
+        const selectedIngredients = Array.from(document.querySelectorAll('.filter-textbox .ing_name')).map(span => span.dataset.id);
+
+        if (selectedIngredients.length === 0) {
+            console.error('No ingredients selected');
+            return;
         }
+
+        // Pass the selected ingredient IDs to the searchParams
+        searchParams = { ingredientIds: selectedIngredients }; // Use ingredientIds instead of ingredients
+    } else if (searchType === 'search-by-name') {
+        const recipeName = document.querySelector('#recipe-name').value.trim();
+        
+        if (!recipeName) {
+            console.error('No recipe name provided');
+            return;
+        }
+
+        searchParams = { name: recipeName };
+    }
+
+    try {
+        const response = await fetch('http://localhost:5500/api/search', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(searchParams),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch recipes');
+        }
+
         const recipes = await response.json();
 
-        // Display the filtered recipes on the webpage
-        console.log('Filtered recipes:', recipes);
-        // Implement logic to display filtered recipes on the webpage
+        // Redirect to result.html with the recipes data
+        sessionStorage.setItem('recipes', JSON.stringify(recipes));
+        window.location.href = '/result.html?recipes=' + encodeURIComponent(JSON.stringify(recipes));
+
     } catch (error) {
-        console.error('Error filtering recipes by ingredient:', error);
-        // Handle the error gracefully, e.g., display a message to the user
+        console.error('Error fetching recipes:', error);
     }
-}
+});
+

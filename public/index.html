@@ -23,11 +23,11 @@
             </div>
         </nav>
         <div class="container">
-            <form action="../backend/search.js">
+            <form id="search-form">
                     <p class="search-label">What will we cook today?</p>
                 <div class="searchbar">
-                    <input type="text" placeholder="Search recipe by name...">
-                    <button type="submit" class="search_btn" value="">Search</button>
+                    <input type="text" id="recipe-name" placeholder="Search recipe by name...">
+                    <button type="submit" class="search-btn" id="search-by-name">Search</button>
                 </div>
                 <div class="filter-label">
                     <label>Search based on what you have</label>
@@ -38,13 +38,21 @@
                 <div class="radio">
                     <div class="radio-inclusions">
                         <label class="radio-label1">Inclusions</label>
-                        <input type="radio" id="inclusions" name="incl" value="0">                    
+                        <input type="radio" id="inclusions" name="radio-filter" value="0">                    
                     </div>
                     <div class="radio-limit">
                         <label class="radio-label2">Limited to</label>
-                        <input type="radio" id="limit" name="lim" value="1">                     
+                        <input type="radio" id="limit" name="radio-filter" value="1">                     
                     </div>
                 </div>
+                <label class="selected-tag-label">Selected Filter</label>
+                <div class="filter-container">
+                    <div class="filter-textbox">
+                        <!-- div class for dynamic tag -->
+                    </div> 
+                    <button type="submit" class="search-btn" id="search-by-ingredients">Search</button>   
+                </div>
+
 
             </form>
         </div>    
