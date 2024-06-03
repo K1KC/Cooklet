@@ -4,7 +4,6 @@ const path = require('path');
 const app = express();
 const IngredientModel = require('./models/ingredient.model');
 const RecipeModel = require('./models/recipe.model');
-// const RecipeIngredientModel = require('./models/recipeIngredient.model');
 const connectDB = require('./connectdb');
 
 // Connect to MongoDB
@@ -38,35 +37,41 @@ app.get('/api/ingredients', async (req, res) => {
     }
 });
 
-// Define a POST route to search recipes
-app.post('/api/search', async (req, res) => {
-    const { ingredientIds } = req.body;
-    try {
-        if (!ingredientIds || !Array.isArray(ingredientIds) || ingredientIds.length === 0) {
-            return res.status(400).json({ error: 'No ingredients selected' });
-        }
+// Define a POST route to search 
+app.post('/api/searchIngredient', async (req, res) => {
+    const { ingredientIds, searchType } = req.body;
 
-        // Find recipes that contain all selected ingredient IDs
+    if (!ingredientIds || !Array.isArray(ingredientIds) || ingredientIds.length === 0) {
+        return res.status(400).json({ error: 'No search parameters provided or invalid parameters' });
+    }
+
+    try {
         const recipes = await RecipeModel.find({ ingredient_ids: { $all: ingredientIds } });
 
-        // Populate ingredient names in recipes
-        await RecipeModel.populate(recipes, { path: 'ingredient_ids', select: 'ingredient_name' });
-
-        // Transform the recipes to include ingredient names
-        const transformedRecipes = recipes.map(recipe => ({
-            recipe_id: recipe.recipe_id,
-            recipe_name: recipe.recipe_name,
-            recipe_description: recipe.recipe_description,
-            ingredients: recipe.ingredient_ids.map(ingredient => ingredient.ingredient_name)
-        }));
-
-        res.json(transformedRecipes);
+        res.json(recipes);
     } catch (error) {
         console.error('Error fetching recipes:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
+app.post('/api/searchName', async (req, res) => {
+    const { name } = req.body;
+    console.log('Search request received with parameters:', req.body); // Log the incoming request body
+
+    try {
+        let recipes;
+        if (name) {
+            recipes = await RecipeModel.find({ recipe_name: new RegExp(name, 'i') });
+        } else {
+            return res.status(400).json({ error: 'No search parameters provided' });
+        }
+        res.json(recipes);
+    } catch (error) {
+        console.error('Error fetching recipes:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 // Start the server
 const PORT = process.env.PORT || 5500;

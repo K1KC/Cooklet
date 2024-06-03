@@ -23,27 +23,19 @@
             </div>
         </nav>
         <div class="container">
-            <form id="search-form">
+            <form id="search-by-name">
                     <p class="search-label">What will we cook today?</p>
                 <div class="searchbar">
                     <input type="text" id="recipe-name" placeholder="Search recipe by name...">
-                    <button type="submit" class="search-btn" id="search-by-name">Search</button>
+                    <button type="submit" class="search-btn" id="search-name">Search</button>
                 </div>
+            </form>
+            <form id="search-by-ingredients">   
                 <div class="filter-label">
                     <label>Search based on what you have</label>
                 </div>
                 <div class="tag-container">
                     <!-- div class for dynamic button -->
-                </div>
-                <div class="radio">
-                    <div class="radio-inclusions">
-                        <label class="radio-label1">Inclusions</label>
-                        <input type="radio" id="inclusions" name="radio-filter" value="0">                    
-                    </div>
-                    <div class="radio-limit">
-                        <label class="radio-label2">Limited to</label>
-                        <input type="radio" id="limit" name="radio-filter" value="1">                     
-                    </div>
                 </div>
                 <label class="selected-tag-label">Selected Filter</label>
                 <div class="filter-container">
@@ -52,15 +44,19 @@
                     </div> 
                     <button type="submit" class="search-btn" id="search-by-ingredients">Search</button>   
                 </div>
-
-
             </form>
-        </div>    
+        </div>
+                
         <footer>
            <p class="left-foot">Group 9 Software Engineer</p>
            <p class="right-foot">Cooklet</p>
         </footer>
         <script src="./index.js"></script>
+        <script src="search.js"></script>
+        <script>
+        default_radio = document.getElementById("inclusions");
+        default_radio.checked = true;
+        </script>
     </body>
 </html>
 
