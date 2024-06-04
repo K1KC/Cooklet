@@ -5,7 +5,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url("background.jpg");
+    background-image: url("../resources/img/background.jpg");
     background-size: cover;
 }
 
@@ -88,7 +88,7 @@ nav a:hover {
 
 .container {
     margin-top: 15vh;
-    background-image: url("./food-doodle-seamless-pattern-vector_3733316.png");
+    background-image: url("../resources/img/food-doodle-seamless-pattern-vector_3733316.png");
     background-blend-mode: hard-light;
     background-repeat: repeat;
     background-size: 30vh;

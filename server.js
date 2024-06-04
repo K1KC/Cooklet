@@ -20,6 +20,8 @@ app.use(express.json());
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/result', express.static(path.join(__dirname, 'result')));
+app.use('/resources', express.static(path.join(__dirname, 'resources')));
 
 // Test route to check if server is running
 app.get('/test', (req, res) => {

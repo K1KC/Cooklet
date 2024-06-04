@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         recipes.forEach(recipe => {
             const ingredientNames = recipe.ingredient_ids.map(id => ingredientMap[id] || 'Unknown ingredient').join(', ');
             const recipeDiv = document.createElement('div');
+            recipeDiv.classname = 'result-container'
             recipeDiv.innerHTML = `
                 <h2>${recipe.recipe_name}</h2>
                 <p>Description: ${recipe.recipe_desc ? recipe.recipe_desc : 'No description available'}</p>

@@ -36,7 +36,7 @@ document.querySelector('#search-by-name').addEventListener('submit', async (even
         // Redirect to result.html with the recipes data
         try {
             sessionStorage.setItem('recipes', JSON.stringify(recipes));
-            window.location.href = '/result.html?recipes=' + encodeURIComponent(JSON.stringify(recipes));
+            window.location.href = '/result/result.html?recipes=' + encodeURIComponent(JSON.stringify(recipes));
         } catch (error) {
             console.error('Error redirecting to result.html:', error);
         }
@@ -83,7 +83,7 @@ document.querySelector('#search-by-ingredients').addEventListener('submit', asyn
         const recipes = await response.json();
 
         // Redirect to result.html and pass recipes data as a query parameter
-        window.location.href = `result.html?recipes=${encodeURIComponent(JSON.stringify(recipes))}`;
+        window.location.href = `/result/result.html?recipes=${encodeURIComponent(JSON.stringify(recipes))}`;
     } catch (error) {
         console.error('Error fetching recipes:', error);
         if (error.name === 'TypeError') {
