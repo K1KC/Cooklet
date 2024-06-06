@@ -18,6 +18,10 @@ const RecipeSchema = new mongoose.Schema({
     ingredient_ids: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Ingredient'
+    }],
+    recipe_steps: [{
+        type: String,
+        required: true
     }]
 });
 

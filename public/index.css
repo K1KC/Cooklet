@@ -98,6 +98,7 @@ nav a:hover {
     border-radius: 12px;
     border: 1px solid black;
     height: 50em;
+    max-height: fit-content;    
 }
 
 .search-label {
@@ -193,20 +194,6 @@ nav a:hover {
     border: none;
 }
 
-.radio {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.radio-inclusions {
-    margin-right: 2vh;
-}
-
-.radio-limit {
-    margin-left: 2vh;
-}
-
 .selected-tag-label {
     margin-top: 3vh;
     display: flex;
@@ -219,6 +206,10 @@ nav a:hover {
 .filter-container {
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 10px;
+    max-height:fit-content;
+    overflow-y: auto;
 }
 
 .filter-textbox {
@@ -227,8 +218,48 @@ nav a:hover {
     border: 2px solid black;
     border-radius: 5px;
     overflow:auto;
-    width: 30%; /* Set a specific width less than 100% */
+    width: 30%;
     height: 10vh;
+}
+
+.selected-tag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+    padding: 5px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.selected-tag span {
+    flex-grow: 1;
+}
+
+.filter-delete-button {
+    background-color: rgb(255, 88, 88);
+    border: 1px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.search2-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2.5vh;
+}
+
+.search-btn-by-ing {
+    height: 40px;
+    width: 30%;
+    z-index: 10;
+    margin-left: -25px;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #ffbd42;
 }
 
 .ing_name {

@@ -31,7 +31,7 @@ app.get('/test', (req, res) => {
 // Define a route to get all ingredients
 app.get('/api/ingredients', async (req, res) => {
     try {
-        const ingredients = await IngredientModel.find({}, 'ingredient_name'); // Retrieve only the ingredient_name field
+        const ingredients = await IngredientModel.find({}, 'ingredient_name');
         res.json(ingredients);
     } catch (error) {
         console.error('Error fetching ingredients:', error);
@@ -39,9 +39,9 @@ app.get('/api/ingredients', async (req, res) => {
     }
 });
 
-// Define a POST route to search 
+// Define a POST route to search recipes by ingredients
 app.post('/api/searchIngredient', async (req, res) => {
-    const { ingredientIds, searchType } = req.body;
+    const { ingredientIds } = req.body;
 
     if (!ingredientIds || !Array.isArray(ingredientIds) || ingredientIds.length === 0) {
         return res.status(400).json({ error: 'No search parameters provided or invalid parameters' });
@@ -49,7 +49,6 @@ app.post('/api/searchIngredient', async (req, res) => {
 
     try {
         const recipes = await RecipeModel.find({ ingredient_ids: { $all: ingredientIds } });
-
         res.json(recipes);
     } catch (error) {
         console.error('Error fetching recipes:', error);
@@ -57,17 +56,20 @@ app.post('/api/searchIngredient', async (req, res) => {
     }
 });
 
+// Define a POST route to search recipes by name
 app.post('/api/searchName', async (req, res) => {
     const { name } = req.body;
-    console.log('Search request received with parameters:', req.body); // Log the incoming request body
+    console.log('Search request received with parameters:', req.body);
 
     try {
         let recipes;
         if (name) {
             recipes = await RecipeModel.find({ recipe_name: new RegExp(name, 'i') });
+            console.log('Found recipes:', recipes);
         } else {
             return res.status(400).json({ error: 'No search parameters provided' });
         }
+
         res.json(recipes);
     } catch (error) {
         console.error('Error fetching recipes:', error);

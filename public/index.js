@@ -48,6 +48,7 @@ function addIngredient(ingredientId, ingredientName) {
     ingredientText.className = 'ing_name';
 
     const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'filter-delete-button';
     deleteBtn.textContent = 'X';
     deleteBtn.className = 'filter-delete-button';
     deleteBtn.addEventListener('click', () => {
@@ -57,6 +58,14 @@ function addIngredient(ingredientId, ingredientName) {
     selectedTagDiv.appendChild(ingredientText);
     selectedTagDiv.appendChild(deleteBtn);
     textboxContainer.appendChild(selectedTagDiv);
+    sortSelectedTags(textboxContainer);
+}
+
+function sortSelectedTags(container) {
+    const tags = Array.from(container.children);
+    tags.sort((a, b) => a.querySelector('span').textContent.localeCompare(b.querySelector('span').textContent));
+
+    tags.forEach(tag => container.appendChild(tag));
 }
 
 

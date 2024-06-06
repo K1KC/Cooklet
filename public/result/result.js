@@ -39,11 +39,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         recipes.forEach(recipe => {
             const ingredientNames = recipe.ingredient_ids.map(id => ingredientMap[id] || 'Unknown ingredient').join(', ');
             const recipeDiv = document.createElement('div');
-            recipeDiv.classname = 'result-container'
+            recipeDiv.className = 'result-container';
             recipeDiv.innerHTML = `
                 <h2>${recipe.recipe_name}</h2>
                 <p>Description: ${recipe.recipe_desc ? recipe.recipe_desc : 'No description available'}</p>
                 <p>Ingredients: ${ingredientNames}</p>
+                <h3>Steps:</h3>
+                <ol>${recipe.recipe_steps ? recipe.recipe_steps.map(step => `<li>${step}</li>`).join('') : 'No steps available'}</ol>
             `;
             resultsDiv.appendChild(recipeDiv);
         });
