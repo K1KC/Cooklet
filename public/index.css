@@ -22,6 +22,7 @@ body {
     padding: 10px 20px;
     box-sizing: border-box;
     height: 13vh;
+    z-index: 5;
 }
 
 nav .logo {
@@ -97,8 +98,24 @@ nav a:hover {
     margin-right: 5vh;
     border-radius: 12px;
     border: 1px solid black;
-    height: 50em;
-    max-height: fit-content;    
+    height: auto;
+    min-height: 50em; 
+}
+
+.container form {
+    opacity: 0;
+    animation: slideIn 1s forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .search-label {

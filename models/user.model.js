@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 
 const UserSchema = mongoose.Schema ({
-    user_id: Number,
+    // user_id: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     required: true,
+    //     unique: true,
+    //     default: mongoose.Types.ObjectId
+    // },
     username: {
         type: String,
         required: '{PATH} is required!'

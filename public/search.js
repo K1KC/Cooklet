@@ -6,6 +6,7 @@ document.querySelector('#search-by-name').addEventListener('submit', async (even
     const recipeName = document.querySelector('#recipe-name').value.trim();
 
     if (!recipeName) {
+        alert("Please enter a recipe name");
         console.error('No recipe name provided');
         return;
     }
@@ -52,6 +53,7 @@ document.querySelector('#search-by-ingredients').addEventListener('submit', asyn
     const selectedIngredients = Array.from(document.querySelectorAll('.filter-textbox .ing_name')).map(span => span.dataset.id);
 
     if (selectedIngredients.length === 0) {
+        alert("Please select at least 1 ingredient");
         console.error('No ingredients selected');
         return;
     }

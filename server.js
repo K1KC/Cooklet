@@ -4,6 +4,7 @@ const path = require('path');
 const app = express();
 const IngredientModel = require('./models/ingredient.model');
 const RecipeModel = require('./models/recipe.model');
+const UserModel = require('./models/user.model');
 const connectDB = require('./connectdb');
 
 // Connect to MongoDB
@@ -48,13 +49,15 @@ app.post('/api/searchIngredient', async (req, res) => {
     }
 
     try {
-        const recipes = await RecipeModel.find({ ingredient_ids: { $all: ingredientIds } });
+        const recipes = await RecipeModel.find({ ingredient_ids: { $all: ingredientIds } }).populate('recipe_maker', 'username');
+        console.log('Recipes with populated makers:', recipes);  // Log the recipes
         res.json(recipes);
     } catch (error) {
         console.error('Error fetching recipes:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 
 // Define a POST route to search recipes by name
 app.post('/api/searchName', async (req, res) => {
@@ -64,7 +67,8 @@ app.post('/api/searchName', async (req, res) => {
     try {
         let recipes;
         if (name) {
-            recipes = await RecipeModel.find({ recipe_name: new RegExp(name, 'i') });
+            recipes = await RecipeModel.find({ recipe_name: new RegExp(name, 'i') })
+                .populate('recipe_maker', 'username');  // Populate the recipe_maker field
             console.log('Found recipes:', recipes);
         } else {
             return res.status(400).json({ error: 'No search parameters provided' });
@@ -73,6 +77,18 @@ app.post('/api/searchName', async (req, res) => {
         res.json(recipes);
     } catch (error) {
         console.error('Error fetching recipes:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+// Define a route to get all users
+app.get('/api/users', async (req, res) => {
+    try {
+        const users = await UserModel.find({}, 'username');
+        res.json(users);
+    } catch (error) {
+        console.error('Error fetching users:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
