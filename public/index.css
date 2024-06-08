@@ -51,7 +51,7 @@ nav ul {
 
 nav ul li {
     margin: 10px 0 10px 0;
-    padding-left: 7vh;
+    padding-left: 8vh;
 }
 
 li a {
@@ -67,7 +67,7 @@ li a {
     font-size: 1rem; 
     font-weight: bold;
     list-style-type: none;
-    margin-left: 1em;
+    margin-left: 2em;
 }
 
 nav a:hover {
@@ -83,22 +83,21 @@ nav a:hover {
 .searchbar {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-self: center;
 }
 
-
 .container {
-    margin-top: 15vh;
+    margin-top: 10vh;
     background-image: url("../resources/img/food-doodle-seamless-pattern-vector_3733316.png");
     background-blend-mode: hard-light;
     background-repeat: repeat;
     background-size: 30vh;
     background-color:rgba(0, 0, 0, 0.5);
-    margin-left: 5vh;
-    margin-right: 5vh;
-    border-radius: 12px;
+    margin-left: 0vh;
+    margin-right: 30%;
+    padding-bottom: 1.7vh;
     border: 1px solid black;
-    height: auto;
+    height: 100%;
     min-height: 50em; 
 }
 
@@ -124,7 +123,7 @@ nav a:hover {
     align-items: center;
     font-size: 32px;
     font-weight: bold;
-    padding-top: 2vh;
+    padding-top: 1vh;
 }
 
 .searchbar :placeholder-shown {
@@ -135,7 +134,7 @@ nav a:hover {
 
 .searchbar input {
     border-radius: 15px;
-    width: 350px;
+    width: 50%;
     height: 30px;
     padding-left: 20px;
     font-size: larger;
@@ -234,6 +233,7 @@ nav a:hover {
     margin: auto;
     border: 2px solid black;
     border-radius: 5px;
+    background-color: white;
     overflow:auto;
     width: 30%;
     height: 10vh;

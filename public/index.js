@@ -39,8 +39,8 @@ function addIngredient(ingredientId, ingredientName) {
         return;
     }
 
-    const selectedTagDiv = document.createElement('div');
-    selectedTagDiv.className = 'selected-tag';
+    const div_selected = document.createElement('div');
+    div_selected.className = 'selected-tag';
 
     const ingredientText = document.createElement('span');
     ingredientText.textContent = ingredientName;
@@ -52,16 +52,16 @@ function addIngredient(ingredientId, ingredientName) {
     deleteBtn.textContent = 'X';
     deleteBtn.className = 'filter-delete-button';
     deleteBtn.addEventListener('click', () => {
-        textboxContainer.removeChild(selectedTagDiv);
+        textboxContainer.removeChild(div_selected);
     });
 
-    selectedTagDiv.appendChild(ingredientText);
-    selectedTagDiv.appendChild(deleteBtn);
-    textboxContainer.appendChild(selectedTagDiv);
-    sortSelectedTags(textboxContainer);
+    div_selected.appendChild(ingredientText);
+    div_selected.appendChild(deleteBtn);
+    textboxContainer.appendChild(div_selected);
+    sort(textboxContainer);
 }
 
-function sortSelectedTags(container) {
+function sort(container) {
     const tags = Array.from(container.children);
     tags.sort((a, b) => a.querySelector('span').textContent.localeCompare(b.querySelector('span').textContent));
 
