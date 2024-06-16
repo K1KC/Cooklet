@@ -46,9 +46,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             
             if (recipes.length === 0) {
-                resultsContainer.innerHTML = `<p>No recipe available yet</p>`;
+                resultsContainer.innerHTML = `<p class="no-recipe-label">No recipe available yet</p>`;
             } else {
-                resultsContainer.innerHTML = ''; // Clear previous results
+                resultsContainer.innerHTML = '';
                 recipes.forEach((recipe, index) => {
                     const ingredientNames = recipe.ingredient_ids.map(id => ingredientMap[id] || 'Unknown ingredient').join(', ');
                     const recipeMakerName = userMap[recipe.recipe_maker] || 'Unknown Maker';

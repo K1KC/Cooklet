@@ -10,7 +10,7 @@ body {
 }
 
 .navbar {
-    background-color: #ffbd42;
+    background-color: #ccc;
     overflow: hidden;
     margin: -10px 0;
     position: fixed;
@@ -93,8 +93,8 @@ nav a:hover {
     background-repeat: repeat;
     background-size: 30vh;
     background-color:rgba(0, 0, 0, 0.5);
-    margin-left: 0vh;
-    margin-right: 30%;
+    margin-left: 20vh;
+    margin-right: 20vh;
     padding-bottom: 1.7vh;
     border: 1px solid black;
     height: 100%;

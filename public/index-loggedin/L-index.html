@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cooklet</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="L-index.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>  
+    <body>
+        <nav class="navbar">
+            <a href="L-index.html">
+                <img src="../resources/img/cooklet-high-resolution-logo-transparent.png" alt="logo" class="logo">
+            </a>
+            <ul>
+                <li><a href="#">Discover</a></li>
+                <li><a href="#">Bookmark</a></li>
+                <li><a href="#">Upload</a></li>
+            </ul>
+            <div class="right-side-navbar">
+                <li><a id="logout-HL" onclick="Logout()">Logout</a></li>
+            </div>
+        </nav>
+        <div class="container">
+            <form id="search-by-name">
+                    <p class="search-label">What will we cook today?</p>
+                <div class="searchbar">
+                    <input type="text" id="recipe-name" placeholder="Search recipe by name...">
+                    <button type="submit" class="search-btn" id="search-name">Search</button>
+                </div>
+            </form>
+            <form id="search-by-ingredients">   
+                <div class="filter-label">
+                    <label>Search based on what you have</label>
+                </div>
+                <div class="tag-container">
+                    <!-- div class for dynamic button -->
+                </div>
+                <label class="selected-tag-label">Selected Filter</label>
+                <div class="filter-container">
+                    <div class="filter-textbox">
+                        <!-- div class for dynamic tag -->
+                    </div> 
+                </div>                    
+                <div class="search2-btn-container">
+                    <button type="submit" class="search-btn-by-ing" id="search-by-ingredients">Search</button>  
+                </div>
+                
+            </form>
+        </div>
+                
+        <!-- <footer>
+           <p class="left-foot">Group 9 Software Engineer</p>
+           <p class="right-foot">Cooklet</p>
+        </footer> -->
+        <script src="../index.js"></script>
+        <script src="../search.js"></script>
+        <script src="./logout.js"></script>
+    </body>
+</html>
+

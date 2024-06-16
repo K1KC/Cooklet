@@ -2,34 +2,32 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const app = express();
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 const IngredientModel = require('./models/ingredient.model');
 const RecipeModel = require('./models/recipe.model');
 const UserModel = require('./models/user.model');
 const connectDB = require('./connectdb');
+const auth = require('./auth');
 
-// Connect to MongoDB
 connectDB();
 
-// Middleware to log incoming requests
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
     next();
 });
 
-// Middleware to parse JSON bodies
 app.use(express.json());
-
-// Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
 app.use('/result', express.static(path.join(__dirname, 'result')));
 app.use('/resources', express.static(path.join(__dirname, 'resources')));
 
-// Test route to check if server is running
 app.get('/test', (req, res) => {
     res.send('Server is running');
 });
 
-// Define a route to get all ingredients
 app.get('/api/ingredients', async (req, res) => {
     try {
         const ingredients = await IngredientModel.find({}, 'ingredient_name');
@@ -40,7 +38,6 @@ app.get('/api/ingredients', async (req, res) => {
     }
 });
 
-// Define a POST route to search recipes by ingredients
 app.post('/api/searchIngredient', async (req, res) => {
     const { ingredientIds } = req.body;
 
@@ -58,8 +55,6 @@ app.post('/api/searchIngredient', async (req, res) => {
     }
 });
 
-
-// Define a POST route to search recipes by name
 app.post('/api/searchName', async (req, res) => {
     const { name } = req.body;
     console.log('Search request received with parameters:', req.body);
@@ -68,7 +63,7 @@ app.post('/api/searchName', async (req, res) => {
         let recipes;
         if (name) {
             recipes = await RecipeModel.find({ recipe_name: new RegExp(name, 'i') })
-                .populate('recipe_maker', 'username');  // Populate the recipe_maker field
+                .populate('recipe_maker', 'username');
             console.log('Found recipes:', recipes);
         } else {
             return res.status(400).json({ error: 'No search parameters provided' });
@@ -82,7 +77,6 @@ app.post('/api/searchName', async (req, res) => {
 });
 
 
-// Define a route to get all users
 app.get('/api/users', async (req, res) => {
     try {
         const users = await UserModel.find({}, 'username');
@@ -93,7 +87,96 @@ app.get('/api/users', async (req, res) => {
     }
 });
 
-// Start the server
+app.post('/api/register', async (req, res) => {
+    const { username, email, password } = req.body;
+
+    try {
+        let user = await UserModel.findOne({ email });
+        if (user) {
+            return res.status(400).json({ msg: 'User already exists' });
+        }
+
+        user = new UserModel({
+            username,
+            email,
+            password
+        });
+
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(password, salt);
+
+        await user.save();
+
+        const payload = {
+            user: {
+                id: user.id
+            }
+        };
+
+        jwt.sign(payload, 'IniCeritanyaToken', {
+            expiresIn: 360000
+        }, (err, token) => {
+            if (err) throw err;
+            res.cookie('token', token, { httpOnly: true }).json({ token });
+        });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+// Login User
+app.post('/api/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        let user = await UserModel.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ msg: 'Invalid credentials' });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ msg: 'Invalid credentials' });
+        }
+
+        const payload = {
+            user: {
+                id: user.id
+            }
+        };
+
+        jwt.sign(payload, 'IniCeritanyaToken', {
+            expiresIn: 360000
+        }, (err, token) => {
+            if (err) throw err;
+            res.cookie('token', token, { httpOnly: true }).json({ token });
+        });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+// Protected Route Example
+app.get('/api/profile', auth, async (req, res) => {
+    try {
+        const user = await UserModel.findById(req.user.id).select('-password');
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+// Logout User
+app.get('/api/logout', (req, res) => {
+    res.clearCookie('token');
+    res.send('Logged out successfully');
+});
+
 const PORT = process.env.PORT || 5500;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

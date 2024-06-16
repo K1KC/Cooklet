@@ -10,7 +10,7 @@ body {
 }
 
 .navbar {
-    background-color: #ffbd42;
+    background-color: #ccc;
     overflow: hidden;
     margin: -10px 0;
     position: fixed;
@@ -51,7 +51,7 @@ nav ul {
 
 nav ul li {
     margin: 10px 0 10px 0;
-    padding-left: 7vh;
+    padding-left: 8vh;
 }
 
 li a {
@@ -67,7 +67,7 @@ li a {
     font-size: 1rem; 
     font-weight: bold;
     list-style-type: none;
-    margin-left: 1em;
+    margin-left: 2em;
 }
 
 nav a:hover {
@@ -80,32 +80,26 @@ nav a:hover {
     height: 70px;
 }
 
-.SR {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.searchbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .container {
-    margin-top: 15vh;
+    margin-top: 10vh;
     background-image: url("../resources/img/food-doodle-seamless-pattern-vector_3733316.png");
     background-blend-mode: hard-light;
     background-repeat: repeat;
     background-size: 30vh;
     background-color:rgba(0, 0, 0, 0.5);
-    margin-left: 5vh;
-    margin-right: 5vh;
-    border-radius: 12px;
+    margin-left: 20vh;
+    margin-right: 20vh;
+    padding-bottom: 1.7vh;
     border: 1px solid black;
-    height: auto;
-    min-height: 50em;
+    height: 100%;
+    min-height: 86vh;
+}
+
+.SR {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .result-container {
@@ -122,6 +116,13 @@ nav a:hover {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.no-recipe-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
 }
 
 .result-inner-container {

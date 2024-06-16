@@ -1,3 +1,4 @@
+const { Timestamp } = require('mongodb');
 const mongoose = require('mongoose');
 
 const UserSchema = mongoose.Schema ({
@@ -19,13 +20,10 @@ const UserSchema = mongoose.Schema ({
         type: String,
         required: '{PATH} is required!'
     },
-    DOB: {
-        type: Date,
-        required: '{PATH} is required!'
-    },
-},{
-    Timestamp: true
-})
+    JoinDate: {
+        type: Date
+    }
+},)
 
 const UserModel = mongoose.models.Users || mongoose.model('User', UserSchema);
 
